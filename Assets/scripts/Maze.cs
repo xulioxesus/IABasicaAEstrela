@@ -1,40 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
-public class MapLocation       
-{
-    public int x;
-    public int z;
-
-    public MapLocation(int _x, int _z)
-    {
-        x = _x;
-        z = _z;
-    }
-
-    public Vector2 ToVector()
-    {
-        return new Vector2(x, z);
-    }
-
-    public static MapLocation operator +(MapLocation a, MapLocation b)
-       => new MapLocation(a.x + b.x, a.z + b.z);
-
-    public override bool Equals(object obj)
-    {
-        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
-            return false;
-        else
-            return x == ((MapLocation)obj).x && z == ((MapLocation)obj).z;
-    }
-
-    public override int GetHashCode()
-    {
-        return 0;
-    }
-
-}
 
 public class Maze : MonoBehaviour
 {
@@ -45,6 +10,8 @@ public class Maze : MonoBehaviour
                                             new MapLocation(0,-1) };
     public int width = 30; //x length
     public int depth = 30; //z length
+    
+    // Un mapa de bytes para saber se está vacío ou hai parede
     public byte[,] map;
     public int scale = 6;
 
@@ -56,6 +23,9 @@ public class Maze : MonoBehaviour
         DrawMap();
     }
 
+    /// <summary>
+    /// Marca todos os elementos de map como ocupados por unha parede
+    /// </summary>
     void InitialiseMap()
     {
         map = new byte[width,depth];
@@ -66,6 +36,10 @@ public class Maze : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Marca que non hai parede cunha probalidade do 50%
+    /// virtual permite que este método se sobreescriba na clase derivada
+    /// </summary>
     public virtual void Generate()
     {
         for (int z = 0; z < depth; z++)
@@ -76,6 +50,9 @@ public class Maze : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Recorre map e crea os GameObjects que representan as paredes
+    /// </summary>
     void DrawMap()
     {
         for (int z = 0; z < depth; z++)
@@ -91,6 +68,12 @@ public class Maze : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Devolve o número de espazos libres que hai arredor dunha posición no map mirando arriba, abaixo, esquerda, dereita
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
     public int CountSquareNeighbours(int x, int z)
     {
         int count = 0;
@@ -102,6 +85,12 @@ public class Maze : MonoBehaviour
         return count;
     }
 
+    /// <summary>
+    /// Devolve o número de espazos libres que hai nas diagonais dunha posición non map 
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
     public int CountDiagonalNeighbours(int x, int z)
     {
         int count = 0;
@@ -113,6 +102,12 @@ public class Maze : MonoBehaviour
         return count;
     }
 
+    /// <summary>
+    /// Devolve o número de espezos libres arredor dunha posición
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
     public int CountAllNeighbours(int x, int z)
     {
         return CountSquareNeighbours(x,z) + CountDiagonalNeighbours(x,z);
