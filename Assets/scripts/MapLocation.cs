@@ -1,44 +1,35 @@
 using UnityEngine;
 
+// Representa unha posición no grid do mapa.
+// Usado para indicar coordenadas inteiras en X e Z (columna, fila).
 public class MapLocation       
 {
+    // Coordenada X (columna)
     public int x;
+
+    // Coordenada Z (fila)
     public int z;
 
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="_x">Localización en x</param>
-    /// <param name="_z">Localización en z</param>
+    // Constructor
+    // _x - localización en x
+    // _z - localización en z
     public MapLocation(int _x, int _z)
     {
         x = _x;
         z = _z;
     }
 
-    /// <summary>
-    /// Transformar un MapLocation nun Vector2
-    /// </summary>
-    /// <returns>Un Vector2 coas coordenadas da localización no mapa</returns>
+    // Converte esta localización a un Vector2 (x, z). Útil para cálculos de distancia.
     public Vector2 ToVector()
     {
         return new Vector2(x, z);
     }
 
-    /// <summary>
-    /// Permite sumar dous MapLocation
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>Devolve un novo MapLocation</returns>
+    // Sobrecarga do operador + para sumar dúas localizacións
     public static MapLocation operator +(MapLocation a, MapLocation b)
        => new MapLocation(a.x + b.x, a.z + b.z);
 
-    /// <summary>
-    /// Para comparar dous MapLocation utilízanse as coordenadas x e z
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
+    // Compara dúas MapLocation polas súas coordenadas (x e z)
     public override bool Equals(object obj)
     {
         if ((obj == null) || !this.GetType().Equals(obj.GetType()))
@@ -47,6 +38,8 @@ public class MapLocation
             return x == ((MapLocation)obj).x && z == ((MapLocation)obj).z;
     }
 
+    // Combina as coordenadas para obter un hash.
+    // Isto é coherente con Equals porque Equals tamén compara (x,z).
     public override int GetHashCode()
     {
         return System.HashCode.Combine(x, z);

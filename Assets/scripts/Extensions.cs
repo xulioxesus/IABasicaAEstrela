@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 
+// Métodos de extensión reutilizables para coleccions do proxecto
 public static class Extensions
 {
+    // Xerador de números aleatorios (compartido para evitar crear moitos Rngs)
     private static System.Random rng = new System.Random();
-    /// <summary>
-    /// Método para mezclar os elementos dunha Lista
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list"></param>
+
+    // Mezcla os elementos dunha lista in-place usando o algoritmo Fisher–Yates.
+    // Este método é unha extensión: chámase como `myList.Shuffle()`.
+    // Conserva o tipo e a capacidade da lista; a orde dos elementos cambia aleatoriamente.
     public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
