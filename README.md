@@ -1,29 +1,6 @@
-# Descrición
+# IA Básica A Etrela
+### Cambios en el proyecto
 
-Emprega este arquivo para describir os cambios do teu proxecto.
+- Se han modificado las propiedades de width y depth del script adjunto al game object **Maze**. Los he puesto con valor 10 para que la mazmorra fuera más pequeña.
 
-Utiliza o formato en markdown coas marcas básicas que aparcen no seguinte exemplo:
-
-# Título principal
-## Subtítulo
-
-Texto normal con **negriña** e *cursiva*.
-
-- Lista 1
-- Lista 2
-
-[Ligazón](https://exemplo.com)
-
-
-```csharp
-using UnityEngine;
-
-public class OlaMundo : MonoBehaviour
-{
-    void Start()
-    {
-        Debug.Log("Ola, mundo desde C#!");
-    }
-}
-
-```
+[Vínculo al repositorio en Github](https://github.com/jnomada/IABasicaAEstrela)
