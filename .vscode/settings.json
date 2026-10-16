@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "IABasicaAEstrela.sln"
+    "dotnet.defaultSolution": "IABasicaAEstrela.slnx"
 }
